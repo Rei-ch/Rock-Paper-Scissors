@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+    let choices = ["ROCK", "PAPER", "SCISSORS"];
+
+    function getComputerChoice() {
+      // Rock: 1    Paper: 2    Scissors: 3
+      let randomNum = Math.floor(Math.random() * 3) + 1;
+      return choices[randomNum - 1];
+    }
+
+    function roundResult(outcome, winner, loser) {
+      return "You " + outcome + "! " + winner + " beats " + loser;
+    }
+
+    function playRound(playerSelection, computerSelection) {
+      switch (playerSelection) {
+        case "ROCK":
+          switch (computerSelection) {
+            case "ROCK":
+              console.log("It's a tie!");
+              break;
+            case "PAPER":
+              console.log(
+                roundResult("lose", computerSelection, playerSelection)
+              );
+              break;
+            case "SCISSORS":
+              console.log(
+                roundResult("win", playerSelection, computerSelection)
+              );
+              return 1;
+          }
+          break;
+
+        case "PAPER":
+          switch (computerSelection) {
+            case "ROCK":
+              console.log(
+                roundResult("win", playerSelection, computerSelection)
+              );
+              return 1;
+            case "PAPER":
+              console.log("It's a tie!");
+              break;
+            case "SCISSORS":
+              console.log(
+                roundResult("lose", computerSelection, playerSelection)
+              );
+          }
+          break;
+        case "SCISSORS":
+          switch (computerSelection) {
+            case "ROCK":
+              console.log(
+                roundResult("lose", computerSelection, playerSelection)
+              );
+              break;
+            case "PAPER":
+              console.log(
+                roundResult("win", playerSelection, computerSelection)
+              );
+              return 1;
+            case "SCISSORS":
+              console.log("It's a tie!");
+          }
+          break;
+        default:
+          console.log("Invalid input: Choose only Rock, Paper, or Scissors");
+      }
+      return 0;
+    }
+
+    function isValid(playerSelection) {
+      return (
+        playerSelection == "ROCK" ||
+        playerSelection == "PAPER" ||
+        playerSelection == "SCISSORS"
+      );
+    }
+
+    function game(round) {
+      let playerSelection;
+      let computerSelection;
+      let win = 0;
+      for (let i = 0; i < round; i++) {
+        while (true) {
+          playerSelection = prompt("Choose Rock Paper or Scissors");
+          playerSelection = playerSelection.toUpperCase();
+          if (isValid(playerSelection)) break;
+          else
+            console.log("Invalid input: Choose only Rock, Paper, or Scissors");
+        }
+        computerSelection = getComputerChoice();
+        win += playRound(playerSelection, computerSelection);
+      }
+
+      if (win > round - win) return "You Win!";
+      else if (win < round - win) return "You lose!";
+      else return "You tied!";
+    }
+
+    let round = 5;
+
+    console.log(game(round));
+  </script>
+</html>
