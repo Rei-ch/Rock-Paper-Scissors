@@ -1,4 +1,4 @@
-const buttons = document.querySelectorAll('.buttons')
+const buttons = document.querySelectorAll('button');
 const body = document.querySelector('body');
 const computerChoice = document.createElement('p')
 const result = document.createElement('div');
@@ -106,6 +106,7 @@ function playGame(e){
     body.insertBefore(gameResult, body.firstChild);
     let playerSelection = e.target.textContent;
     if (!playerSelection) return;
+
     let roundResult = game(playerSelection);
     if (roundResult === 1)
         ++win;
