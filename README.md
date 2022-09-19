@@ -1,2 +1,2 @@
 # Rock-Paper-Scissors
-Rock paper scissors game from The Odin Project
+Rock paper scissors game from The Odin Project with UI

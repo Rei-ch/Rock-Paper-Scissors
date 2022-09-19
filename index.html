@@ -1,107 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script>
-    let choices = ["ROCK", "PAPER", "SCISSORS"];
-
-    function getComputerChoice() {
-      // Rock: 1    Paper: 2    Scissors: 3
-      let randomNum = Math.floor(Math.random() * 3) + 1;
-      return choices[randomNum - 1];
-    }
-
-    function roundResult(outcome, winner, loser) {
-      return "You " + outcome + "! " + winner + " beats " + loser;
-    }
-
-    function playRound(playerSelection, computerSelection) {
-      switch (playerSelection) {
-        case "ROCK":
-          switch (computerSelection) {
-            case "ROCK":
-              console.log("It's a tie!");
-              break;
-            case "PAPER":
-              console.log(
-                roundResult("lose", computerSelection, playerSelection)
-              );
-              break;
-            case "SCISSORS":
-              console.log(
-                roundResult("win", playerSelection, computerSelection)
-              );
-              return 1;
-          }
-          break;
-
-        case "PAPER":
-          switch (computerSelection) {
-            case "ROCK":
-              console.log(
-                roundResult("win", playerSelection, computerSelection)
-              );
-              return 1;
-            case "PAPER":
-              console.log("It's a tie!");
-              break;
-            case "SCISSORS":
-              console.log(
-                roundResult("lose", computerSelection, playerSelection)
-              );
-          }
-          break;
-        case "SCISSORS":
-          switch (computerSelection) {
-            case "ROCK":
-              console.log(
-                roundResult("lose", computerSelection, playerSelection)
-              );
-              break;
-            case "PAPER":
-              console.log(
-                roundResult("win", playerSelection, computerSelection)
-              );
-              return 1;
-            case "SCISSORS":
-              console.log("It's a tie!");
-          }
-          break;
-        default:
-          console.log("Invalid input: Choose only Rock, Paper, or Scissors");
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rock Paper Scissors</title>
+    <script src="script.js" defer></script>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(65, 61, 73);
       }
-      return 0;
-    }
 
-    function isValid(playerSelection) {
-      return (
-        playerSelection == "ROCK" ||
-        playerSelection == "PAPER" ||
-        playerSelection == "SCISSORS"
-      );
-    }
+      .buttons {
+        padding: 2em;
+        height: 5rem;
+        display: flex;
+        gap: 4em;
+      }
 
-    function game(round) {
-      let playerSelection;
-      let computerSelection;
-      let win = 0;
-      for (let i = 0; i < round; i++) {
-        while (true) {
-          playerSelection = prompt("Choose Rock Paper or Scissors");
-          playerSelection = playerSelection.toUpperCase();
-          if (isValid(playerSelection)) break;
-          else
-            console.log("Invalid input: Choose only Rock, Paper, or Scissors");
+      button {
+        align-content: center;
+        width: 5.5em;
+        font-size: 2.5rem;
+        font-family: "Courier New", Courier, monospace;
+        background-color: rgb(62, 43, 78);
+        color: rgb(173, 183, 226);
+        border-radius: 0.5em;
+        padding: 0.3em 0.1em;
+      }
+
+      .results {
+        color: lightcoral;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 2em;
+        animation: pop 0.25s ease-in-out;
+      }
+      @keyframes pop {
+        50% {
+          transform: scale(1.05);
         }
-        computerSelection = getComputerChoice();
-        win += playRound(playerSelection, computerSelection);
       }
+    </style>
+  </head>
 
-      if (win > round - win) return "You Win!";
-      else if (win < round - win) return "You lose!";
-      else return "You tied!";
-    }
-
-    let round = 5;
-
-    console.log(game(round));
-  </script>
+  <body>
+    <div class="buttons">
+      <button>ROCK</button>
+      <button>PAPER</button>
+      <button>SCISSORS</button>
+    </div>
+  </body>
 </html>
